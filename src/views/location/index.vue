@@ -137,7 +137,6 @@ export default {
   }
 }
 .main {
-  background-color: #f8f8f8;
   .guess, .hot, .allCity-item {
     margin-bottom: 20px;
     background-color: #fff;

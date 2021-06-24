@@ -128,7 +128,6 @@ export default {
   }
 }
 .main {
-  background: #f8f8f8;
   .search {
     margin: 10px 0;
     padding: 10px 20px;
