@@ -1,2 +1,2 @@
-# vue3-vite2-piano
-This is a piano performance project based on vue3 + vite2
+# vue3+vite2+element-plus
+低配版饿了么手机端开发
