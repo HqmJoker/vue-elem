@@ -6,6 +6,6 @@ const getters = {
   allCities: state => state.location.allCities,
   // user
   userInfo: state => state.user.userInfo,
-  isLogin: state => state.location.isLogin,
+  isLogin: state => state.user.isLogin,
 }
 export default getters

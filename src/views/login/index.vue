@@ -52,7 +52,7 @@ export default {
     this.getCaptchaCode();
   },
   methods: {
-    ...mapActions(['setUserInfo']),
+    ...mapActions('user', ['setUserInfo']),
     // 登录/注册
     login() {
       if(!this.form.username) {
@@ -91,7 +91,7 @@ export default {
           })
           return;
         }
-        this.setUserInfo();
+        this.setUserInfo(res);
         this.goBack();
       })
     },

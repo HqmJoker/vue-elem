@@ -1,11 +1,7 @@
 <template>
   <header class="header">
     <span>vue3.elem</span>
-    <div class="operation">
-      <span @click="login">登录</span>
-       | 
-      <span @click="register">注册</span>
-    </div>
+    <HeadLogin></HeadLogin>
   </header>
   <main class="main">
     <!-- 定位位置 -->
@@ -41,9 +37,12 @@
 <script>
 import { getLocationCity } from '@/api/city'
 import { mapGetters, mapMutations } from 'vuex'
+import HeadLogin from '@/components/head-login.vue'
 
 export default {
-
+  components: {
+    HeadLogin,
+  },
   data() {
     return {
       // 当前位置信息
@@ -132,9 +131,6 @@ export default {
   justify-content: space-between;
   padding: 15px 10px;
   color: white;
-  .operation {
-    font-size: 14px;
-  }
 }
 .main {
   .guess, .hot, .allCity-item {

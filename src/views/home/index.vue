@@ -1,21 +1,25 @@
 <template>
   <header class="header">
-    <i class="el-icon-search"></i>
-    <span class="address">{{ defaultLocation.name }}</span>
-    <HeadLogin @doLogin="doLogin"></HeadLogin>
+    <i class="el-icon-search" @click="goSearch"></i>
+    <span class="address" @click="goLocation">{{ defaultLocation.name }}</span>
+    <HeadLogin></HeadLogin>
   </header>
-  <main>
+  <main class="main">
     home 
+    <p v-for="i in 100" :key="i">text{{ i }}</p>
   </main>
+  <Tabbar class="tabbar" :activeIndex="0"></Tabbar>
 </template>
 
 <script>
 import HeadLogin from '@/components/head-login.vue'
+import Tabbar from '@/components/tabbar.vue'
 import { mapGetters } from 'vuex'
 
 export default {
   components: {
-    HeadLogin
+    HeadLogin,
+    Tabbar
   },
   data() {
     return {
@@ -25,10 +29,16 @@ export default {
     ...mapGetters(['defaultLocation'])
   },
   methods: {
-    doLogin(isLogin) {
+    // 跳转到搜索页面
+    goSearch() {
       this.$router.push({
-        name: 'Login',
-        params: { isLogin }
+        name: 'Search'
+      })
+    },
+    // 跳转到修改位置
+    goLocation() {
+      this.$router.push({
+        name: 'Location'
       })
     }
   }
@@ -43,5 +53,12 @@ export default {
   justify-content: space-between;
   padding: 15px 10px;
   color: white;
+  height: 50px;
+  box-sizing: border-box;
+}
+.main {
+  width: 100%;
+  height: calc(100vh - 50px - 50px); // 视图高度-头部高度-尾部高度
+  overflow-y: auto;
 }
 </style>

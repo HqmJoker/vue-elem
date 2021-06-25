@@ -17,7 +17,7 @@ export default {
     }
     // 判断用户是否登录
     const userInfo = this.userInfo || getStore('userInfo');
-    // this.setUserInfo(userInfo);
+    this.setUserInfo(userInfo);
   },
   methods: {
     ...mapActions({
