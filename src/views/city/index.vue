@@ -64,7 +64,6 @@ export default {
     },
     // 选择详细地址
     setLocation(addr) {
-      console.log(this.placeHistory)
       const checkRepeat = this.placeHistory.some(item => item.geohash === addr.geohash)
       if(!this.placeHistory.length || !checkRepeat) {
         this.placeHistory.push(addr)
