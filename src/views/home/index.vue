@@ -5,7 +5,24 @@
     <HeadLogin></HeadLogin>
   </header>
   <main class="main">
-    home 
+    <el-carousel :autoplay="false" arrow="never">
+      <el-carousel-item>
+        <ul class="foodList">
+          <li class="foodList-item" v-for="(food, foodIndex) in carousel0" :key="foodIndex">
+            <img class="foodPic" :src="imgBaseUrl + food.image_url" alt="食物类型" />
+            <span>{{ food.title }}</span>
+          </li>
+        </ul>
+      </el-carousel-item>
+      <el-carousel-item>
+        <ul class="foodList">
+          <li class="foodList-item" v-for="(food, foodIndex) in carousel1" :key="foodIndex">
+            <img class="foodPic" :src="imgBaseUrl + food.image_url" alt="食物类型" />
+            <span>{{ food.title }}</span>
+          </li>
+        </ul>
+      </el-carousel-item>
+    </el-carousel> 
     <p v-for="i in 100" :key="i">text{{ i }}</p>
   </main>
   <Tabbar class="tabbar" :activeIndex="0"></Tabbar>
@@ -15,6 +32,7 @@
 import HeadLogin from '@/components/head-login.vue'
 import Tabbar from '@/components/tabbar.vue'
 import { mapGetters } from 'vuex'
+import { getFoodType } from '@/api/home.js'
 
 export default {
   components: {
@@ -23,12 +41,29 @@ export default {
   },
   data() {
     return {
+      foodType: [], // 食物类型
+      imgBaseUrl: 'https://fuss10.elemecdn.com', //图片域名地址
     }
   },
   computed: {
-    ...mapGetters(['defaultLocation'])
+    ...mapGetters(['defaultLocation', 'defaultLocation']),
+    carousel0() {
+      return this.foodType.slice(0, 8)
+    },
+    carousel1() {
+      return this.foodType.slice(8)
+    },
+  },
+  mounted() {
+    this.getFoodType();
   },
   methods: {
+    // 获取食物分类
+    getFoodType() {
+      getFoodType(this.defaultLocation.geohash).then(res => {
+        this.foodType = res;
+      })
+    },
     // 跳转到搜索页面
     goSearch() {
       this.$router.push({
@@ -60,5 +95,31 @@ export default {
   width: 100%;
   height: calc(100vh - 50px - 50px); // 视图高度-头部高度-尾部高度
   overflow-y: auto;
+  .el-carousel {
+    height: 200px;
+    .foodList {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      align-items: center;
+      padding: 10px 0;
+      background-color: #fff;
+      &-item {
+        width: 25%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 20px;
+        .foodPic {
+          width: 45px;
+          height: 45px;
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
 }
 </style>
