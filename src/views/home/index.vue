@@ -5,7 +5,7 @@
     <HeadLogin></HeadLogin>
   </header>
   <main class="main">
-    <el-carousel :autoplay="false" arrow="never">
+    <el-carousel height="200px" :autoplay="false" arrow="never">
       <el-carousel-item>
         <ul class="foodList">
           <li class="foodList-item" v-for="(food, foodIndex) in carousel0" :key="foodIndex">
@@ -23,7 +23,13 @@
         </ul>
       </el-carousel-item>
     </el-carousel> 
-    <p v-for="i in 100" :key="i">text{{ i }}</p>
+    <div class="shoplist">
+      <div class="shoplist-title">
+        <i class="iconfont icon-shangjia"></i>
+        <span>附近商家</span>
+      </div>
+      <ShopList></ShopList>
+    </div>
   </main>
   <Tabbar class="tabbar" :activeIndex="0"></Tabbar>
 </template>
@@ -31,13 +37,15 @@
 <script>
 import HeadLogin from '@/components/head-login.vue'
 import Tabbar from '@/components/tabbar.vue'
+import ShopList from '@/components/shop-list.vue'
 import { mapGetters } from 'vuex'
 import { getFoodType } from '@/api/home.js'
 
 export default {
   components: {
     HeadLogin,
-    Tabbar
+    Tabbar,
+    ShopList
   },
   data() {
     return {
@@ -96,7 +104,7 @@ export default {
   height: calc(100vh - 50px - 50px); // 视图高度-头部高度-尾部高度
   overflow-y: auto;
   .el-carousel {
-    height: 200px;
+    margin-bottom: 10px;
     .foodList {
       display: flex;
       flex-wrap: wrap;
@@ -121,5 +129,37 @@ export default {
       }
     }
   }
+  .shoplist {
+    background-color: #fff;
+    &-title {
+      padding: 10px;
+      margin-bottom: 10px;
+      .iconfont {
+        margin-right: 10px;
+      }
+    }
+  }
 }
+</style>
+
+<style lang="scss">
+  .el-carousel {
+    .el-carousel__indicators {
+       .el-carousel__indicator {
+        .el-carousel__button {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: #000;
+          opacity: .2;
+        }
+      }
+      .is-active {
+        .el-carousel__button {
+          background: $blue;
+          opacity: 1;
+        }
+      }
+    }
+  }
 </style>
