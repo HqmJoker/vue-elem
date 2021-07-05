@@ -59,7 +59,7 @@ export default {
     }
   }
   .actived {
-    color: #3190e8;
+    color: $blue;
   }
 }
 </style>

@@ -133,7 +133,6 @@ export default {
     background-color: #fff;
     &-title {
       padding: 10px;
-      margin-bottom: 10px;
       .iconfont {
         margin-right: 10px;
       }
